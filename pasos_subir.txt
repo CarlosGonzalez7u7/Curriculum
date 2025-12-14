@@ -1,0 +1,11 @@
+1.- npm run deploy
+
+2.-
+# 1. Prepara todos los archivos modificados
+git add .
+
+# 2. Guarda los cambios con un mensaje
+git commit -m "Configuración de deploy lista"
+
+# 3. Sube los archivos a la rama principal de GitHub
+git push origin main
