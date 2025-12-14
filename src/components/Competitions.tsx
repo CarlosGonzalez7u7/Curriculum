@@ -91,9 +91,8 @@ export default function Competitions() {
       prize: "2do y 3er lugar",
       entrevista: "https://www.facebook.com/share/v/16KaMzjipU/",
       images: [
-        getImageUrl("Hacka2025/hack1.jpg"),
-        getImageUrl("Hacka2025/hack2.jpg"),
-        getImageUrl("Hacka2025/hack3.jpg"),
+        getImageUrl("Hacka2025/Hacka1.jpg"),
+        getImageUrl("Hacka2025/Hacka2.jpg"),
       ],
     },
     {
@@ -108,7 +107,7 @@ export default function Competitions() {
       date: "2022",
       achievement: "3er lugar - Captura de banderas",
       prize: "3er lugar",
-      images: [getImageUrl("Hacker/hack1.jpg")],
+      images: [getImageUrl("Hacker/Hack1.jpg")],
     },
   ];
 
