@@ -166,7 +166,7 @@ export default function Hero() {
                   className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-violet-500/20 shadow-2xl"
                 >
                   <img
-                    src="public/yo.jpg"
+                    src="/public/yo.jpg"
                     alt="Juan Carlos Gonzalez Orozco"
                     className="w-full h-full object-cover"
                   />
