@@ -1,4 +1,107 @@
-# React + TypeScript + Vite
+# Mi Curriculum - Portafolio Web
+
+Un portafolio web moderno creado con **React**, **TypeScript**, **Vite** y **Tailwind CSS**.
+
+## 🚀 Características
+
+- ✨ Diseño moderno y responsivo
+- 🎨 Animaciones con Framer Motion
+- 📱 Compatible con dispositivos móviles
+- 🚀 Rendimiento optimizado con Vite
+- 📦 Componentes reutilizables
+- 🎯 Secciones de proyectos (Web, Móvil, Robótica)
+- 🏆 Certificaciones y competencias
+- 📊 Stack de tecnologías destacadas
+
+## 🛠️ Tecnologías
+
+- **React 19**: Librería UI
+- **TypeScript**: Type-safe JavaScript
+- **Vite 7**: Build tool rápido
+- **Tailwind CSS**: Utility-first CSS framework
+- **Framer Motion**: Animaciones declarativas
+- **React Icons**: Iconos populares
+
+## 📋 Instalación
+
+\`\`\`bash
+
+# Instalar dependencias
+
+npm install
+
+# Iniciar servidor de desarrollo
+
+npm run dev
+
+# Compilar para producción
+
+npm run build
+
+# Validar código con ESLint
+
+npm run lint
+\`\`\`
+
+## 📁 Estructura del Proyecto
+
+\`\`\`
+src/
+├── components/ # Componentes React
+│ ├── WebProjects.tsx
+│ ├── MobileProjects.tsx
+│ ├── Robotics.tsx
+│ ├── Certifications.tsx
+│ ├── Hero.tsx
+│ └── ...
+├── utils/ # Funciones utilitarias
+└── App.tsx
+
+public/ # Archivos estáticos e imágenes
+├── school-management-system.jpg
+├── fitness-app-interface.jpg
+└── ...
+\`\`\`
+
+## 🖼️ Gestión de Imágenes
+
+Las imágenes se encuentran en la carpeta \`/public\` y se cargan usando rutas absolutas con soporte automático para diferentes entornos:
+
+- **Desarrollo**: \`/image.jpg\`
+- **Producción (GitHub Pages)**: \`/Curriculum/image.jpg\`
+
+El \`import.meta.env.BASE_URL\` se utiliza automáticamente para construir las rutas correctas según el entorno.
+
+## 🚀 Despliegue
+
+El proyecto está configurado para desplegarse en GitHub Pages:
+
+\`\`\`bash
+npm run deploy
+\`\`\`
+
+> Nota: Asegúrate de que el repositorio sea público y que hayas configurado GitHub Pages en los ajustes del repositorio.
+
+## 📝 Configuración ESLint
+
+El proyecto incluye reglas de ESLint estrictas:
+
+- ✅ TypeScript strict mode
+- ✅ React Hooks rules
+- ✅ React Refresh optimization
+- ⚙️ Reglas personalizadas para permitir variables con prefijo \`\_\`
+
+## 🔧 Scripts Disponibles
+
+- \`npm run dev\` - Iniciar servidor de desarrollo
+- \`npm run build\` - Compilar para producción
+- \`npm run lint\` - Validar código
+- \`npm run preview\` - Ver build de producción localmente
+- \`npm run deploy\` - Desplegar a GitHub Pages
+
+---
+
+Hecho con ❤️ por Carlos González
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -17,9 +120,9 @@ If you are developing a production application, we recommend updating the config
 
 ```js
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [
       // Other configs...
 
@@ -34,40 +137,40 @@ export default defineConfig([
     ],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
     },
   },
-])
+]);
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from "eslint-plugin-react-x";
+import reactDom from "eslint-plugin-react-dom";
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [
       // Other configs...
       // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
+      reactX.configs["recommended-typescript"],
       // Enable lint rules for React DOM
       reactDom.configs.recommended,
     ],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
     },
   },
-])
+]);
 ```
