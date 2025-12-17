@@ -1,30 +1,53 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { motion } from "framer-motion"
-import { useState } from "react"
-import { FaEnvelope, FaUser, FaComment, FaPaperPlane } from "react-icons/fa"
+import type React from "react";
+import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { FaEnvelope, FaUser, FaComment, FaPaperPlane } from "react-icons/fa";
+// 1. Importar EmailJS
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
+  // 2. Crear referencia al formulario
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
-  const [status, setStatus] = useState("")
+  });
+  const [status, setStatus] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus("sending")
+    e.preventDefault();
+    setStatus("sending");
 
-    // Simulación de envío
-    setTimeout(() => {
-      setStatus("success")
-      setFormData({ name: "", email: "", message: "" })
-      setTimeout(() => setStatus(""), 3000)
-    }, 1500)
-  }
+    if (!formRef.current) return;
+
+    const serviceId = import.meta.env.VITE_SERVICE_ID;
+    const templateId = import.meta.env.VITE_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+
+    // Verificación de seguridad para desarrollo
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("Faltan las variables de entorno de EmailJS");
+      setStatus("error");
+      return;
+    }
+
+    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey).then(
+      (result) => {
+        console.log(result.text);
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus(""), 3000);
+      },
+      (error) => {
+        console.log(error.text);
+        setStatus("error");
+      }
+    );
+  };
 
   return (
     <section id="contacto" className="py-20 px-4">
@@ -44,12 +67,17 @@ export default function Contact() {
             <FaEnvelope className="text-4xl text-cyan-400" />
           </motion.div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Contacto</span>
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              Contacto
+            </span>
           </h2>
-          <p className="text-xl text-slate-400">¿Tienes un proyecto en mente? ¡Hablemos!</p>
+          <p className="text-xl text-slate-400">
+            ¿Tienes un proyecto en mente? ¡Hablemos!
+          </p>
         </motion.div>
 
         <motion.form
+          ref={formRef} // <--- Conectar la referencia aquí
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -64,8 +92,11 @@ export default function Contact() {
               </label>
               <input
                 type="text"
+                name="user_name" // <--- IMPORTANTE: Debe coincidir con tu template de EmailJS
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-all"
                 placeholder="Tu nombre"
                 required
@@ -79,8 +110,11 @@ export default function Contact() {
               </label>
               <input
                 type="email"
+                name="user_email" // <--- IMPORTANTE
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-all"
                 placeholder="tu@email.com"
                 required
@@ -93,8 +127,11 @@ export default function Contact() {
                 Mensaje
               </label>
               <textarea
+                name="message" // <--- IMPORTANTE
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
                 rows={5}
                 className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-all resize-none"
                 placeholder="Cuéntame sobre tu proyecto..."
@@ -124,5 +161,5 @@ export default function Contact() {
         </motion.form>
       </div>
     </section>
-  )
+  );
 }
